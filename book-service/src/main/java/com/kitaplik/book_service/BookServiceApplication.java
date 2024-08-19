@@ -2,14 +2,17 @@ package com.kitaplik.book_service;
 
 import com.kitaplik.book_service.model.Book;
 import com.kitaplik.book_service.repository.BookRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
-public class 	BookServiceApplication {
+@EnableEurekaClient
+public class 	BookServiceApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookServiceApplication.class, args);
