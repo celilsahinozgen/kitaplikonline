@@ -23,8 +23,13 @@ public class LibraryService {
                 .orElseThrow(() -> new LibraryNotFoundException(" Library could not found by id " + id));
 
 
-        LibraryDto libraryDto = new LibraryDto()
-        return
+        LibraryDto libraryDto = new LibraryDto(library.getId());
+        return libraryDto;
+    }
+
+    public LibraryDto createLibrary() {
+        Library newLibrary = libraryRepository.save(new Library());
+        return new LibraryDto(newLibrary.getId());
     }
 
 }
