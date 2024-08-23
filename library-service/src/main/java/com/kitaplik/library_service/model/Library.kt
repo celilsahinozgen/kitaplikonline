@@ -4,7 +4,6 @@ import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
 
 
-
 @Entity
 data class Library @JvmOverloads constructor(
     @Id

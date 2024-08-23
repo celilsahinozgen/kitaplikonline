@@ -5,20 +5,35 @@ import com.kitaplik.library_service.dto.LibraryDto;
 import com.kitaplik.library_service.service.LibraryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.env.Environment;
+
+
+
+
 @RestController
+@RefreshScope
 @RequestMapping("/v1/library")
 public class LibraryController {
 
-    private final LibraryService libraryService;
     Logger logger = LoggerFactory.getLogger(LibraryController.class);
+    private final LibraryService libraryService;
+    private final Environment environment;
 
-    public LibraryController(LibraryService libraryService) {
+    @Value("${library-service.book.count}")
+    private String count;
+
+    public LibraryController(LibraryService libraryService, Environment environment) {
         this.libraryService = libraryService;
+        this.environment = environment;
     }
 
     @GetMapping("{id}")
@@ -28,7 +43,8 @@ public class LibraryController {
 
     @PostMapping
     public ResponseEntity<LibraryDto> createLibrary() {
-        logger.info("Create library Loggeri ekledim ben");
+        logger.info("Library created on port number " + environment.getProperty("local.server.port"));
+
         return ResponseEntity.ok(libraryService.createLibrary());
     }
 
@@ -43,5 +59,9 @@ public class LibraryController {
         return ResponseEntity.ok(libraryService.getAllLibraries());
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<String> getCount() {
+        return ResponseEntity.ok("Library count is" + count);
+    }
 
 }
