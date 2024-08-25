@@ -1,0 +1,23 @@
+syntax = "proto3";
+//birden cok proto yazabilecegi söyleniyor true yaparak birden cok yapılacagı
+option java_multiple_files = true;
+
+
+message BookId {
+  string bookId = 1;
+  string isbn = 2;
+}
+
+message Isbn {
+  string isbn = 1;
+//  BookId bookId =2;    gibi ustteki verdigimiz methodu aşagıda kullanbiliryoruz
+}
+
+service BookService {
+//  public privete gibi  kullanılan şey burda rpc dir
+  rpc getBookIdByIsbn (Isbn) returns(BookId);
+}
+
+
+
+

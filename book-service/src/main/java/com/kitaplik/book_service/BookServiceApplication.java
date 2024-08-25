@@ -12,7 +12,7 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class 	BookServiceApplication implements CommandLineRunner {
+public class BookServiceApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookServiceApplication.class, args);
